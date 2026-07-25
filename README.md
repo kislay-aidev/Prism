@@ -1,101 +1,209 @@
-# 📈 Stock Market Dashboard in Python
+# Prism
 
-An interactive, high-fidelity stock market dashboard built with **Streamlit**, **Plotly**, and **yFinance**.  
-This repository tracks the chronological, step-by-step evolution of a production-grade dashboard, showcasing real-time data visualization, technical indicators, custom trading signals, real-time news aggregation, and automated watchlist tracking.
+**Refracting market data into intelligence.**
 
----
-
-## 🚀 Project Overview
-This project displays a progression of Streamlit dashboards, each introducing unique functionalities, architectural refactorings, or bug fixes. The final builds allow users to:
-- Enter and compare multiple stock tickers side-by-side.
-- Select customizable moving average overlays (SMA/EMA) and window sizes.
-- Chart high-fidelity candlesticks combined with Bollinger Bands, volume bars, RSI (14-day) oscillators, and MACD indicators (lines + histograms).
-- Track golden cross/death cross events using configurable short/long crossover windows.
-- Visualize dynamic BUY/SELL signal markers directly mapped on price charts.
-- View real-time company metadata profile cards and ticker-related news feeds.
-- Monitor active stock watchlists displaying percent changes and trading volumes.
-- Enable auto-refresh intervals with live market open/closed indicators.
+Prism is a production-grade financial intelligence platform that transforms raw market data into actionable insights. Built with Streamlit, Plotly, and yFinance, it provides professional-grade technical analysis, AI-powered signal generation, portfolio management, and real-time market intelligence.
 
 ---
 
-## ✨ Features Breakdown by Version
+## Features
 
-Here is a roadmap of the version evolution of files included in this repository:
-
-1. **`Base_Final.py` (V1 - Base Dashboard)**: A simple interface to search a single ticker and display daily close price charts with a 50-day SMA overlay and basic average/max/min statistics.
-2. **`Ver2.py` (V2 - Multi-Stock Comparison)**: Introduces support for plotting multiple stocks side-by-side on a shared chart and viewing comparison tables of key metrics.
-3. **`Ver3_Final.py` (V3 - Technical Indicators)**: Adds technical analysis support with individual charts for Bollinger Bands, RSI (14-day), and MACD. Implements dynamic date defaults (`date.today()`) and handles yfinance column MultiIndex issues.
-4. **`Ver4_Final.py` (V4 - Real-Time Updates & Modularization)**: Integrates auto-refresh functionality, candlestick rendering, volume charting, simple buy/sell warning logic, current price metrics, and organizes codebase into modular, reusable functions.
-5. **`Ver5_Final.py` (V5 - UI & Metrics Optimization)**: Incorporates unified icons, a live US market status indicator (Open/Closed), a 4-column metrics header, MACD histograms, price-to-Bollinger-Band boundary checks, and input validations.
-6. **`Ver6.py` (V6 - Multi-Stock Selection & SMA/EMA controls)**: Sequentially loops over list of tickers, rendering custom SMA/EMA selections and individual chart sets for each stock.
-7. **`Ver6_Enhanced.py` (V6 Enhanced - Chart/Data Exports)**: Embeds plotly PNG chart download options (requires `kaleido`) and CSV data table extraction.
-8. **`Ver6_Enhanced2.py` (V6 Enhanced 2 - Company Info & Crossovers)**: Appends a basic company profile information widget and a 50/200 SMA crossover checker.
-9. **`Ver6_Enhanced2_Corrected.py` (V6 Enhanced 2 - Code Cleanup)**: Resolves logic redundancy by cleaning up duplicate function definitions and fixing the main application run loop.
-10. **`Ver6_Enhanced2_Rectified.py` (V6 Enhanced 2 - Configurable Crossovers)**: Adds custom short/long moving average windows in the sidebar, auto-swapping for range protection, caching decorators (`@st.cache_data`) for network queries, and draws triangle indicators (BUY/SELL) on Plotly close price charts.
-11. **`Ver6_Enhanced2_RFixed.py` (V6 Enhanced 2 - News & Watchlists)**: Integrates an automated ticker news feed and watchlist summary widgets alongside weekend support.
-12. **`Ver6_Enhanced3.py` (V6 Enhanced 3 - Alternate Branch)**: Reverts custom crossover variables to focus exclusively on watchlist summaries and news.
-13. **`Ver6_Enhanced3_Corrected.py` (V6 Enhanced 3 - Combined Build)**: A merged version containing both news integration and customizable crossovers (executes with duplicate loop rendering).
+- **Professional Charting** — Candlestick, OHLC, Line, Area, Volume charts with dark/light/AMOLED themes
+- **Technical Analysis Engine** — RSI, MACD, ADX, ATR, Bollinger Bands, Ichimoku, Stochastic, SuperTrend, VWAP, Williams %R, OBV, Fibonacci, Support/Resistance
+- **AI Signal Engine** — Multi-factor scoring with confidence levels, price targets, risk assessment, and recommendation generation
+- **Company Intelligence** — Financial ratios, growth metrics, valuation analysis, fundamental scoring, dividend data
+- **News Intelligence** — Real-time news aggregation with deduplication, categorization, sentiment analysis, and impact scoring
+- **Portfolio Manager** — Position tracking, cost basis, P&L calculation, allocation analytics, risk exposure
+- **Export Engine** — CSV, Excel, PDF, HTML report, PNG image exports
+- **Multi-Theme Support** — Dark, Light, and AMOLED themes with full CSS customization
+- **Market Clock** — Real-time market open/close status with NYSE calendar integration
 
 ---
 
-## 🛠 Installation
+## Architecture
 
-### 1. Prerequisites
-Ensure you have **Python 3.8+** installed on your system.
-
-### 2. Clone the Repository
-```bash
-git clone https://github.com/kislay-aidev/Stock-Market-Dashboard.git
-cd Stock-Market-Dashboard
+```
+prism/
+├── app.py                 # Main application entry point
+├── core/                  # Foundation layer
+│   ├── settings.py        # Application configuration
+│   ├── state.py           # Session state management
+│   ├── market.py          # Market clock (NYSE calendar)
+│   ├── cache.py           # Caching decorator
+│   ├── logger.py          # Logging utility
+│   ├── performance.py     # Performance timer
+│   └── exceptions.py      # Custom exception hierarchy
+├── data/                  # Data layer
+│   ├── engine.py          # Stock data engine (retry, cache, validation)
+│   ├── batch.py           # Batch multi-symbol downloads
+│   ├── validator.py       # Input validation
+│   └── calendar.py        # Trading calendar
+├── indicators/            # Technical indicators
+│   ├── pipeline.py        # Indicator computation pipeline
+│   ├── rsi.py, macd.py, adx.py, atr.py
+│   ├── bollinger.py, moving_averages.py
+│   ├── supertrend.py, ichimoku.py
+│   ├── stochastic.py, williams_r.py, vwap.py
+│   ├── obv.py, fibonacci.py, support_resistance.py
+│   └── registry.py        # Indicator registry
+├── ai/                    # Signal intelligence
+│   ├── scoring.py         # Multi-factor scoring engine
+│   ├── recommendation.py  # Buy/sell/hold recommendations
+│   ├── risk.py            # Risk classification
+│   ├── targets.py         # Price target generation
+│   ├── rating.py          # Star rating system
+│   └── dashboard.py       # AI insights dashboard
+├── charts/                # Charting engine
+│   ├── candlestick.py, ohlc.py, line.py, area.py, volume.py
+│   ├── comparison.py      # Normalized comparison
+│   ├── panels.py          # RSI/MACD panel charts
+│   ├── indicators_overlay.py, compose.py, signals.py
+│   └── export.py          # Chart export (PNG, HTML)
+├── financials/            # Fundamentals
+│   ├── ratios.py, growth.py, dividend.py
+│   ├── valuation.py, quality.py, health.py
+│   ├── fundamental_score.py
+│   ├── income_analysis.py, balance_analysis.py, cashflow_analysis.py
+│   └── report.py
+├── news/                  # News intelligence
+│   ├── fetcher.py, sentiment.py, summarizer.py, renderer.py
+│   ├── categorizer.py, deduplicate.py, digest.py
+│   ├── impact.py, timeline.py
+├── portfolio/             # Portfolio management
+│   ├── manager.py, allocation.py, analytics.py
+│   ├── cost_basis.py, pnl.py, transactions.py, risk.py
+│   └── dashboard.py, report.py
+├── reports/               # Report generation
+│   ├── technical_report.py, financial_report.py, portfolio_report.py
+│   ├── executive_summary.py, report_manager.py
+│   ├── html_template.py, pdf_template.py
+├── export/                # Export engine
+│   ├── csv_export.py, excel_export.py, image_export.py
+│   ├── pdf_report.py, html_report.py, manager.py
+├── ui/                    # UI components
+│   ├── theme.py           # Theme engine with CSS injection
+│   ├── metric_cards.py, status_bar.py, navigation.py
+│   ├── search.py, refresh.py, favorites.py
+│   ├── notifications.py, layout_presets.py
+├── dashboard/             # Dashboard layout
+│   ├── home.py, sidebar.py, tabs.py, layout.py
+│   ├── integration.py     # Data & indicator integration
+│   └── toolbar.py, workspace.py, actions.py, export_center.py
+├── tests/                 # Test suite
+│   ├── test_ai.py, test_indicators.py, test_reports.py
+├── .streamlit/            # Streamlit configuration
+│   └── config.toml        # Theme & server settings
+├── Legacy/                # Historical versions (v1–v7)
+└── requirements.txt
 ```
 
-### 3. Install Dependencies
-Install all required libraries using pip:
+---
+
+## Installation
+
+### Prerequisites
+
+- Python 3.10+
+- pip
+
+### Setup
+
 ```bash
-pip install streamlit yfinance plotly pandas streamlit-autorefresh kaleido
+# Clone the repository
+git clone https://github.com/yourusername/prism.git
+cd prism
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+streamlit run app.py
 ```
-*(Note: `kaleido` is optional and required specifically for exporting plotly graphs as PNG images.)*
+
+### Quick Start
+
+1. Open the application in your browser (default: `http://localhost:8501`)
+2. Enter a stock ticker (e.g., `AAPL`, `MSFT`, `TSLA`) in the sidebar
+3. Select a chart type (Candlestick, OHLC, Line, Area)
+4. Navigate between views using the sidebar navigation
+5. Switch between Dark, Light, and AMOLED themes
 
 ---
 
-## 🚀 Usage Instructions
+## Screenshots
 
-You can run any specific version of the stock dashboard using Streamlit's command-line interface.
+> Screenshots will be added to `screenshots/` directory.
 
-To start the dashboard of your choice, run:
+| View | Description |
+|---|---|
+| Dashboard | Market overview with price metrics and candlestick chart |
+| Technical Analysis | Full technical indicator suite with panel charts |
+| Financials | Company fundamentals, ratios, and valuation |
+| News | Real-time news with categorization and sentiment |
+| Portfolio | Position tracking, P&L, and allocation analytics |
+| AI Insights | AI-generated signals, targets, and risk assessment |
 
-```bash
-# Run the base version (V1)
-streamlit run Base_Final.py
+---
 
-# Run the multi-stock version (V2)
-streamlit run Ver2.py
+## Roadmap
 
-# Run the technical indicators version (V3)
-streamlit run Ver3_Final.py
+- [x] Phase 1: Foundation — Configuration, caching, logging, state management
+- [x] Phase 2: Data Engine — Centralized data retrieval with retry and validation
+- [x] Phase 3: Chart Engine — Multi-chart types, overlays, trade markers
+- [x] Phase 4: Technical Analysis — 17 indicators with pipeline orchestration
+- [x] Phase 5: Signal Engine — Multi-factor scoring and recommendation
+- [x] Phase 6: Company Intelligence — Fundamentals, ratios, scoring
+- [x] Phase 7: Financial Statements — Income, balance sheet, cash flow
+- [x] Phase 8: News Intelligence — Categorization, sentiment, impact
+- [x] Phase 9: Portfolio Manager — Positions, P&L, risk, allocation
+- [x] Phase 10: AI Dashboard — Comprehensive market insights
+- [x] Phase 11: Export Engine — CSV, Excel, PDF, HTML, PNG
+- [x] Phase 12: UI Polish — Theme engine, responsive layout, animations
+- [x] Phase 13: Tests — Unit tests for core modules
+- [ ] Phase 14: Integration tests and stress testing
+- [ ] Phase 15: CI/CD pipeline and production deployment
 
-# Run the real-time auto-refresh version (V4)
-streamlit run Ver4_Final.py
+---
 
-# Run the enhanced UI version (V5)
-streamlit run Ver5_Final.py
+## Version History
 
-# Run the main multi-ticker loop version (V6)
-streamlit run Ver6.py
+| Version | Description |
+|---|---|
+| v1 | Base dashboard with single-stock price charts |
+| v2 | Multi-stock comparison |
+| v3 | Technical indicators (Bollinger, RSI, MACD) |
+| v4 | Real-time updates, candlestick charts, signals |
+| v5 | UI polish, market status widget |
+| v6 | Multi-ticker, SMA/EMA controls, exports |
+| v7 | Modular rewrite — foundation build |
+| **v8 (Prism 1.0)** | **Production-grade financial intelligence platform** |
 
-# Run the final production build featuring crossovers, company profile caching, watchlist summary, and news feed:
-streamlit run Ver6_Enhanced2_RFixed.py
-```
+Historical versions are preserved in `Legacy/`.
 
-### Navigating the Interface
-1. **Sidebar Controls**:
-   - **Enter Stock Tickers**: Supply a comma-separated list of symbols (e.g. `AAPL, MSFT, GOOGL`).
-   - **Date Selectors**: Choose start and end dates for historical data.
-   - **Enable Live Mode**: Toggle auto-refresh interval slider (ranges 10 to 300 seconds).
-   - **Moving Average Controls**: Switch between SMA and EMA type and input custom window values.
-   - **Crossover Settings**: Configure short/long indicators (e.g., 20 and 50 days) for signal notifications.
-   - **Watchlist & News**: Toggle News Feed elements and supply additional tickers for watchlist panels.
-2. **Main Panel**:
-   - **Metrics Cards**: View real-time ticker prices, daily highs/lows, volumes, and status.
-   - **Interactive Charts**: Hover, zoom, and crop charts using Plotly's UI toolbar. Download charts as images instantly.
-   - **Download Buttons**: Export historical metrics to local CSV spreadsheets.
+---
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+## Author
+
+**Author placeholder** — *For attribution*
+
+**GitHub**: [github.com/yourusername](https://github.com/yourusername)
+
+**Intern ID**: `[placeholder]`
+
+---
+
+## Contributing
+
+Contributions are welcome. Please open an issue or pull request for any improvements.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request

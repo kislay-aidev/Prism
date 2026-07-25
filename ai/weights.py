@@ -1,0 +1,9 @@
+WEIGHTS={
+"RSI":15,
+"MACD":20,
+"ADX":15,
+"TREND":15,
+"VOLUME":10,
+"VWAP":10,
+"RISK":15
+}
