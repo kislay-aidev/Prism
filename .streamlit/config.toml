@@ -4,22 +4,10 @@ runOnSave = false
 
 [theme]
 primaryColor = "#6366F1"
-backgroundColor = "#0F0F11"
-secondaryBackgroundColor = "#1A1B1E"
-textColor = "#E4E4E7"
-font = "sans serif"
-
-[theme.light]
-primaryColor = "#6366F1"
 backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#F4F4F5"
-textColor = "#18181B"
-
-[theme.amoled]
-primaryColor = "#7C3AED"
-backgroundColor = "#000000"
-secondaryBackgroundColor = "#0A0A0B"
-textColor = "#FFFFFF"
+secondaryBackgroundColor = "#F6F7F9"
+textColor = "#1E1E1E"
+font = "sans serif"
 
 [browser]
 gatherUsageStats = false

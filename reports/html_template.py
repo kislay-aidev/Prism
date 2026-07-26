@@ -1,12 +1,18 @@
+from ui.theme import get_theme
+
+
 def render(report: dict) -> str:
-    parts = ["<html><head><style>",
-             "body{font-family:sans-serif;max-width:900px;margin:40px auto;padding:20px;background:#0F0F11;color:#E4E4E7}",
-             "h1{color:#6366F1}h2{color:#A1A1AA;border-bottom:1px solid #27272A;padding-bottom:6px}",
-             "table{width:100%;border-collapse:collapse;margin:12px 0}",
-             "td,th{padding:8px 12px;border:1px solid #27272A;text-align:left}",
-             "th{background:#1A1B1E;color:#6366F1}",
-             "</style></head><body>",
-             "<h1>Executive Report</h1>"]
+    t = get_theme()
+    parts = [
+        "<html><head><style>",
+        f"body{{font-family:'Inter',sans-serif;max-width:900px;margin:40px auto;padding:20px;background:{t.surface};color:{t.text}}}",
+        f"h1{{color:{t.primary}}}h2{{color:{t.secondary};border-bottom:1px solid {t.border};padding-bottom:6px}}",
+        "table{width:100%;border-collapse:collapse;margin:12px 0}",
+        f"td,th{{padding:8px 12px;border:1px solid {t.border};text-align:left}}",
+        f"th{{background:{t.surface_secondary};color:{t.primary}}}",
+        "</style></head><body>",
+        "<h1>Executive Report</h1>",
+    ]
 
     for section, data in report.items():
         parts.append(f"<h2>{section.title()}</h2>")
