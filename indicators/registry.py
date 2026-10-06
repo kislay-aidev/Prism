@@ -1,0 +1,10 @@
+INDICATORS={
+"RSI":"rsi.calculate",
+"MACD":"macd.calculate",
+"ADX":"adx.calculate",
+"VWAP":"vwap.calculate",
+"SuperTrend":"supertrend.calculate",
+"ATR":"atr.calculate",
+"OBV":"obv.calculate",
+"Ichimoku":"ichimoku.calculate"
+}

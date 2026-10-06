@@ -1,0 +1,3 @@
+APP_NAME="Stock Dashboard"
+DEFAULT_THEME="dark"
+DEFAULT_INTERVAL="1d"

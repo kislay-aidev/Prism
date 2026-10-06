@@ -1,0 +1,10 @@
+def stars(confidence):
+    if confidence>=90:
+        return "★★★★★"
+    if confidence>=75:
+        return "★★★★☆"
+    if confidence>=60:
+        return "★★★☆☆"
+    if confidence>=40:
+        return "★★☆☆☆"
+    return "★☆☆☆☆"
